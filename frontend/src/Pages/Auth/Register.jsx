@@ -37,7 +37,7 @@ export default function Register() {
         <div className="flex items-center justify-center min-h-screen">
             <Card className="p-8 w-[450px] space-y-6 ">
                 <h1 className="text-2xl font-semibold">Create an account</h1>
-                {message && <div className="bg-green-700 text-white p-4 rounded-xl ">{message}</div>}
+                {message && <div className="dark:bg-green-950 dark:border dark:border-green-500 bg-green-500 text-white p-4 rounded-xl ">{message}</div>}
                 <form onSubmit={handleFormSubmit} className="space-y-6">
                     <Input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} label="Name" />
                     {errors.name && <span className="text-red-500 text-sm font-medium">{errors.name[0]}</span>}
@@ -45,10 +45,10 @@ export default function Register() {
                     <Input type="text" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} label="Email" />
                     {errors.email && <span className="text-red-500 text-sm font-medium">{errors.email[0]}</span>}
 
-                    <Input type="text" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} label="Password" />
+                    <Input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} label="Password" />
                     {errors.password && <span className="text-red-500 text-sm font-medium">{errors.password[0]}</span>}
 
-                    <Input type="text" value={formData.password_confirmation} onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })} label="Confirm Password" />
+                    <Input type="password" value={formData.password_confirmation} onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })} label="Confirm Password" />
 
                     <Button type="submit" isLoading={loading} className="w-full p-6 bg-zinc-800 text-white">
                         {loading ? "Please wait..." : "Create an account"}

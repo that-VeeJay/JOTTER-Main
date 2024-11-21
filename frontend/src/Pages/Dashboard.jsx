@@ -1,11 +1,45 @@
 import Bulletin from "../Sections/Dashboard/Bulletin";
 import Featured from "../Sections/Dashboard/Featured";
+import LatestPosts from "../Sections/Dashboard/LatestPosts";
+import MostPopular from "../Sections/MostPopular";
+import Categories from "../Sections/Dashboard/Categories";
+import Subscribe from "../Sections/Dashboard/Subscribe";
 
 export default function Dashboard() {
     return (
-        <div className="container mx-auto min-h-screen pt-5 space-y-8">
+        <div className="container mx-auto min-h-screen pt-5  space-y-6 md:space-y-12">
             <Bulletin />
             <Featured />
+
+            <div className="grid xl:grid-cols-3 gap-5">
+                <div className="xl:col-span-2">
+                    <LatestPosts />
+                </div>
+                <div className="xl:col-span-1">
+                    <MostPopular />
+                    <Categories />
+                </div>
+            </div>
+
+            <Subscribe />
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
     );
 }

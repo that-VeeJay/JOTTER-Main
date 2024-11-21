@@ -42,7 +42,7 @@ export default function Login() {
                     <Input type="text" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} label="Email" />
                     {errors.email && <span className="text-red-500 text-sm font-medium">{errors.email}</span>}
 
-                    <Input type="text" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} label="Password" />
+                    <Input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} label="Password" />
                     {errors.password && <span className="text-red-500 text-sm font-medium">{errors.password[0]}</span>}
 
                     <Button type="submit" isLoading={loading} className="w-full p-6 bg-zinc-800 text-white">

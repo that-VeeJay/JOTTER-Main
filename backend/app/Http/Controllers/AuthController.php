@@ -26,7 +26,7 @@ class AuthController extends Controller
             if ($user) {
                 $token = $user->createToken($request->name);
                 return ResponseHelper::success(
-                    message: "User has been registered successfully.", 
+                    message: "Your registration was successful", 
                     data: $user, 
                     token: $token->plainTextToken
                 );

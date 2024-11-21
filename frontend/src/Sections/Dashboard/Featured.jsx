@@ -1,6 +1,10 @@
-import { Avatar, Card, Image } from "@nextui-org/react";
+import { Avatar, Card } from "@nextui-org/react";
+import MyImage from "../../Components/MyImage";
 import post1 from "../../../public/posts/post1.jpg";
 import post2 from "../../../public/posts/post2.jpg";
+import post3 from "../../../public/posts/post3.jpg";
+import post4 from "../../../public/posts/post4.jpg";
+import post5 from "../../../public/posts/post5.jpg";
 import CategoryChip from "../../Components/CategoryChip";
 
 export default function Featured() {
@@ -26,7 +30,7 @@ export default function Featured() {
                             </Card>
                         </div>
                         <div className="md:col-start-2 md:col-end-8 order-1 md:order-none">
-                            <Image src={post1} className="aspect-[4/2.5] object-cover" />
+                            <MyImage src={post1} loading="lazy" className="aspect-[4/2.5] object-cover" />
                         </div>
                     </div>
                 </div>
@@ -35,12 +39,12 @@ export default function Featured() {
                 <div className="flex flex-col gap-6 justify-center ">
                     <div className="grid grid-cols-7">
                         <div className="col-start-1 col-end-3">
-                            <Image src={post2} className="aspect-square object-cover" />
+                            <MyImage src={post2} loading="lazy" className="aspect-square object-cover" />
                         </div>
 
                         <div className="col-start-3 col-end-8 p-2 flex flex-col gap-1 justify-center">
                             <div className="flex items-center gap-2">
-                                <Avatar size="sm" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                                <Avatar size="sm" src="https://i.pravatar.cc/150?u=a042581f4e2902024d" />
                                 <p className="text-sm font-medium">John Doe</p>
                                 <span>•</span>
                                 <p className="text-xs font-medium text-gray-400">10 mins ago</p>
@@ -52,12 +56,12 @@ export default function Featured() {
 
                     <div className="grid grid-cols-7">
                         <div className="col-start-1 col-end-3">
-                            <Image src={post2} className="aspect-square object-cover" />
+                            <MyImage src={post3} loading="lazy" className="aspect-square object-cover" />
                         </div>
 
                         <div className="col-start-3 col-end-8 p-2 flex flex-col gap-1 justify-center">
                             <div className="flex items-center gap-2">
-                                <Avatar size="sm" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                                <Avatar size="sm" src="https://i.pravatar.cc/150?u=a042581f4es29026024d" />
                                 <p className="text-sm font-medium">John Doe</p>
                                 <span>•</span>
                                 <p className="text-xs font-medium text-gray-400">10 mins ago</p>
@@ -69,12 +73,12 @@ export default function Featured() {
 
                     <div className="grid grid-cols-7">
                         <div className="col-start-1 col-end-3">
-                            <Image src={post2} className="aspect-square object-cover" />
+                            <MyImage src={post4} loading="lazy" className="aspect-square object-cover" />
                         </div>
 
                         <div className="col-start-3 col-end-8 p-2 flex flex-col gap-1 justify-center">
                             <div className="flex items-center gap-2">
-                                <Avatar size="sm" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                                <Avatar size="sm" src="https://i.pravatar.cc/150?u=a42581f4e29026024d" />
                                 <p className="text-sm font-medium">John Doe</p>
                                 <span>•</span>
                                 <p className="text-xs font-medium text-gray-400">10 mins ago</p>
