@@ -2,6 +2,7 @@ import { lazy, Suspense, useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppContext } from "./Context/AppContext";
 import Layout from "./Pages/Layout";
+import { Spinner } from "@nextui-org/react";
 
 const Creators = lazy(() => import("./Pages/Creators"));
 const Dashboard = lazy(() => import("./Pages/Dashboard"));
@@ -10,7 +11,11 @@ const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
 const CreatePost = lazy(() => import("./Pages/CreatePost"));
 
-const Loading = () => <div className="loading-spinner">Loading...</div>;
+const Loading = () => (
+    <div className="container mx-auto text-center min-h-screen mt-12">
+        <Spinner color="default" />
+    </div>
+);
 
 const withSuspense = (Component) => {
     return (
