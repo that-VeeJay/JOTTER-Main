@@ -1,7 +1,7 @@
 export default function CreatePost() {
     return (
-        <>
-            <div>Create Post</div>
-        </>
+        <div className="container mx-auto min-h-screen">
+            <div></div>
+        </div>
     );
 }

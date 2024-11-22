@@ -2,8 +2,64 @@ import { Avatar, Card } from "@nextui-org/react";
 import MyImage from "../../Components/MyImage";
 import CategoryChip from "../../Components/CategoryChip";
 import { formatDate } from "../../Helpers/Helpers";
+import { Skeleton } from "@nextui-org/react";
+import post1 from "../../../public/posts/post1.jpg";
 
-export default function Featured({ posts }) {
+export default function Featured({ posts, loading }) {
+    if (loading) {
+        return (
+            <section>
+                <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 grid-rows-1">
+                    {/* Column 1 */}
+                    <div className="col-span-1 xl:col-span-2">
+                        <div className="grid md:grid-cols-7 relative gap-3">
+                            <div className="flex items-center order-2 md:order-none">
+                                <Card className="md:absolute z-20 md:col-start-1 md:col-end-4 w-full p-5 space-y-3 rounded-xl">
+                                    <div className="flex gap-2 items-center">
+                                        <Skeleton className="h-10 w-10 rounded-full" />
+                                        <div className="space-y-2">
+                                            <Skeleton className="h-3 w-24 rounded-lg" />
+                                            <Skeleton className="h-3 w-4/5 rounded-lg" />
+                                        </div>
+                                    </div>
+
+                                    <Skeleton className="h-10 w-full rounded-lg" />
+
+                                    <Skeleton className="h-16 w-full rounded-lg" />
+
+                                    <Skeleton className="h-6 w-12 rounded-full" />
+                                </Card>
+                            </div>
+                            <div className="md:col-start-2 md:col-end-8 order-1 md:order-none">
+                                <Skeleton className="aspect-[4/2.5] w-full rounded-xl" />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Column 2 (Skeleton loader for posts) */}
+                    <div className="flex flex-col gap-6 justify-center">
+                        {Array.from({ length: 3 }).map((_, index) => (
+                            <div key={index} className="grid grid-cols-7">
+                                <div className="col-start-1 col-end-3">
+                                    <Skeleton className="aspect-square w-full rounded-xl" />
+                                </div>
+                                <div className="col-start-3 col-end-8 p-2 flex flex-col gap-1 justify-center space-y-3">
+                                    <div className="flex items-center gap-2">
+                                        <Skeleton className="rounded-full w-8 h-8" />
+                                        <Skeleton className="h-3 w-28 rounded-full" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Skeleton className="h-12 w-4/5 rounded-lg" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
     if (!posts || posts.length === 0) {
         return <p>No posts available.</p>;
     }
@@ -31,7 +87,7 @@ export default function Featured({ posts }) {
                             </Card>
                         </div>
                         <div className="md:col-start-2 md:col-end-8 order-1 md:order-none">
-                            <MyImage src={posts[0].image} loading="lazy" className="aspect-[4/2.5] object-cover" />
+                            <MyImage src={post1} loading="lazy" className="aspect-[4/2.5] object-cover" />
                         </div>
                     </div>
                 </div>

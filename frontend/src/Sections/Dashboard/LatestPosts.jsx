@@ -1,11 +1,33 @@
-import { Avatar } from "@nextui-org/react";
+import { Avatar, Skeleton } from "@nextui-org/react";
 import MyImage from "../../Components/MyImage";
 import SectionTitle from "../../Components/SectionTitle";
 import CategoryChip from "../../Components/CategoryChip";
 import { formatDate } from "../../Helpers/Helpers";
 
-export default function LatestPosts({ posts }) {
+export default function LatestPosts({ posts, loading }) {
     const safePosts = posts || [];
+
+    if (loading) {
+        return (
+            <section className="space-y-3">
+                <SectionTitle showArrow={true}>Latest Posts</SectionTitle>
+                {Array.from({ length: 3 }).map((_, index) => (
+                    <div key={index} className="grid md:grid-cols-3 gap-3">
+                        <Skeleton className="aspect-video md:aspect-square w-full rounded-xl" />
+                        <div className="md:col-span-2 p-5 lg:p-8 space-y-3">
+                            <div className="flex items-center gap-3">
+                                <Skeleton className="rounded-full w-8 h-8" />
+                                <Skeleton className="h-5 w-24 rounded-full" />
+                            </div>
+                            <Skeleton className="h-16 w-full rounded-lg" />
+                            <Skeleton className="h-8 w-4/5 rounded-lg" />
+                            <Skeleton className="h-6 w-12 rounded-full" />
+                        </div>
+                    </div>
+                ))}
+            </section>
+        );
+    }
 
     return (
         <section className="space-y-3">
