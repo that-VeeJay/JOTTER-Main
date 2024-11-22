@@ -8,6 +8,7 @@ const Dashboard = lazy(() => import("./Pages/Dashboard"));
 const Community = lazy(() => import("./Pages/Community"));
 const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
+const CreatePost = lazy(() => import("./Pages/CreatePost"));
 
 const Loading = () => <div className="loading-spinner">Loading...</div>;
 
@@ -30,6 +31,7 @@ export default function App() {
                         <Route index element={withSuspense(Dashboard)} />
                         <Route path="creators" element={withSuspense(Creators)} />
                         <Route path="community" element={withSuspense(Community)} />
+                        <Route path="create-post" element={withSuspense(CreatePost)} />
                     </Route>
                     <Route path="/register" element={withSuspense(Register)} />
                     <Route path="/login" element={withSuspense(Login)} />
@@ -38,4 +40,3 @@ export default function App() {
         </main>
     );
 }
-

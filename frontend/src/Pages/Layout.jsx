@@ -1,4 +1,4 @@
-import { Outlet, useLocation, Link, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, Link, useNavigate, NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Button, Switch, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 import { JotterLogo } from "../Icons/JotterLogo";
@@ -75,7 +75,9 @@ export default function Layout() {
                 <NavbarContent justify="end">
                     {user ? (
                         <>
-                            <div></div>
+                            <Button as={NavLink} to="/create-post" color="danger">
+                                Create
+                            </Button>
 
                             <div className="hidden md:block">
                                 <Dropdown placement="bottom-end" className={`${theme === "dark" ? "dark text-white" : ""}`}>
