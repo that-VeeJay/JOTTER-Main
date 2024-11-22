@@ -3,15 +3,17 @@ import MyImage from "../../Components/MyImage";
 import SectionTitle from "../../Components/SectionTitle";
 import CategoryChip from "../../Components/CategoryChip";
 import { formatDate } from "../../Helpers/Helpers";
+import { useContext } from "react";
+import { LatestPostsContext } from "../../Context/LatestPostsContext";
 
-export default function LatestPosts({ posts, loading }) {
-    const safePosts = posts || [];
+export default function LatestPosts() {
+    const { latestPosts: posts, loading } = useContext(LatestPostsContext);
 
-    if (loading) {
-        return (
-            <section className="space-y-3">
-                <SectionTitle showArrow={true}>Latest Posts</SectionTitle>
-                {Array.from({ length: 3 }).map((_, index) => (
+    return (
+        <section className="space-y-3">
+            <SectionTitle showArrow={true}>Latest Posts</SectionTitle>
+            {loading ? (
+                Array.from({ length: 3 }).map((_, index) => (
                     <div key={index} className="grid md:grid-cols-3 gap-3">
                         <Skeleton className="aspect-video md:aspect-square w-full rounded-xl" />
                         <div className="md:col-span-2 p-5 lg:p-8 space-y-3">
@@ -24,16 +26,9 @@ export default function LatestPosts({ posts, loading }) {
                             <Skeleton className="h-6 w-12 rounded-full" />
                         </div>
                     </div>
-                ))}
-            </section>
-        );
-    }
-
-    return (
-        <section className="space-y-3">
-            <SectionTitle showArrow={true}>Latest Posts</SectionTitle>
-            {safePosts.length > 0 ? (
-                safePosts.map((post) => (
+                ))
+            ) : posts.length > 0 ? (
+                posts.map((post) => (
                     <div key={post.id} className="grid md:grid-cols-3 ">
                         <MyImage src={post.image} className="aspect-video md:aspect-square object-cover" />
                         <div className="md:col-span-2 p-5 lg:p-8 space-y-2 lg:space-y-3">
