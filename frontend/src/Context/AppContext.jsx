@@ -4,14 +4,12 @@ export const AppContext = createContext();
 
 export default function AppProvider({ children }) {
     // ************ Check localStorage for saved theme and apply it ************
-    const [theme, setTheme] = useState("light");
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
     useEffect(() => {
-        const storedTheme = localStorage.getItem("theme");
-        if (storedTheme) {
-            setTheme(storedTheme);
-        }
-    }, []);
+        document.documentElement.className = theme; 
+        localStorage.setItem("theme", theme); 
+    }, [theme]);
 
     // ************ Provide authenticated user and token ************
     const [token, setToken] = useState(localStorage.getItem("token"));

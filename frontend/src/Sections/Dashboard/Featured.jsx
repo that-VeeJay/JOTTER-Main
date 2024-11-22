@@ -6,6 +6,7 @@ import post1 from "../../../public/posts/post1.jpg";
 import CategoryChip from "../../Components/CategoryChip";
 import { FeaturedPostsContext } from "../../Context/FeaturedPostsContext";
 
+
 export default function Featured() {
     const { featuredPosts: posts, loading } = useContext(FeaturedPostsContext);
 
@@ -37,7 +38,7 @@ export default function Featured() {
                     </div>
 
                     {/* Column 2 (Skeleton loader for posts) */}
-                    <div className="flex flex-col gap-6 justify-center">
+                    <div className="flex flex-col gap-3 xl:gap-6 justify-center">
                         {Array.from({ length: 3 }).map((_, index) => (
                             <div key={index} className="grid grid-cols-7">
                                 <div className="col-start-1 col-end-3">
@@ -84,8 +85,8 @@ export default function Featured() {
                     </div>
 
                     {/* Column 2 */}
-                    <div className="flex flex-col gap-6 justify-center">
-                        {posts.length > 1 ? (
+                    <div className="flex flex-col gap-3 xl:gap-6 justify-center">
+                        {posts ? (
                             posts.slice(1).map((post) => (
                                 <div key={post.id} className="grid grid-cols-7">
                                     <div className="col-start-1 col-end-3">

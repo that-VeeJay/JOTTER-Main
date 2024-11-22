@@ -5,5 +5,16 @@ export default function CategoryChip({ children, size = "sm" }) {
         lg: "py-2 px-4 text-base",
     };
 
-    return <div className={`bg-red-500 ${sizeClasses[size]} w-fit text-white rounded-full bg-opacity-75 font-light cursor-pointer`}>{children}</div>;
+    const categoryColors = {
+        Food: "bg-green-500",
+        Technology: "bg-blue-500",
+        Gaming: "bg-purple-500",
+        Travel: "bg-yellow-500",
+        Lifestyle: "bg-pink-500",
+        Education: "bg-pink-500",
+    };
+
+    const bgColor = categoryColors[children] || categoryColors.Default;
+
+    return <div className={`${bgColor} ${sizeClasses[size]} w-fit text-white rounded-full bg-opacity-75 font-light cursor-pointer`}>{children}</div>;
 }

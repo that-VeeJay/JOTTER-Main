@@ -17,12 +17,10 @@ export default function Layout() {
 
     // ************ Theme Logic ************
     const { theme, setTheme } = useContext(AppContext);
-    const [isSwitchChecked, setIsSwitchChecked] = useState(localStorage.getItem("theme") === "dark" ? false : true);
 
-    function toggleTheme() {
-        const newTheme = theme === "dark" ? "light" : "dark";
+    function toggleTheme(currentTheme, setTheme) {
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
         setTheme(newTheme);
-        localStorage.setItem("theme", newTheme);
     }
 
     // ************ Logout Logic ************
@@ -120,11 +118,8 @@ export default function Layout() {
                     <NavbarItem>
                         <Switch
                             className="hidden md:flex"
-                            defaultSelected={isSwitchChecked}
-                            onChange={() => {
-                                toggleTheme();
-                                setIsSwitchChecked(!isSwitchChecked);
-                            }}
+                            defaultSelected={theme === "light"}
+                            onChange={() => toggleTheme(theme, setTheme)}
                             size="sm"
                             color="danger"
                             startContent={<SunIcon />}

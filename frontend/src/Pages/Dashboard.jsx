@@ -8,6 +8,7 @@ import LatestPosts from "../Sections/Dashboard/LatestPosts";
 export default function Dashboard() {
     return (
         <div className="container mx-auto min-h-screen pt-5  space-y-6 md:space-y-12">
+
             <Bulletin />
             <Featured />
 
@@ -21,6 +22,7 @@ export default function Dashboard() {
                 </div>
             </div>
             <Subscribe />
+
             <br />
         </div>
     );

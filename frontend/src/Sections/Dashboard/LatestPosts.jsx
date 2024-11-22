@@ -27,7 +27,7 @@ export default function LatestPosts() {
                         </div>
                     </div>
                 ))
-            ) : posts.length > 0 ? (
+            ) : posts ? (
                 posts.map((post) => (
                     <div key={post.id} className="grid md:grid-cols-3 ">
                         <MyImage src={post.image} className="aspect-video md:aspect-square object-cover" />
