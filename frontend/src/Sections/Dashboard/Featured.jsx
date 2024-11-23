@@ -6,7 +6,6 @@ import post1 from "../../../public/posts/post1.jpg";
 import CategoryChip from "../../Components/CategoryChip";
 import { FeaturedPostsContext } from "../../Context/FeaturedPostsContext";
 
-
 export default function Featured() {
     const { featuredPosts: posts, loading } = useContext(FeaturedPostsContext);
 

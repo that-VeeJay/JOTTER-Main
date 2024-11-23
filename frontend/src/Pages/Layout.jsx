@@ -73,9 +73,13 @@ export default function Layout() {
                 <NavbarContent justify="end">
                     {user ? (
                         <>
-                            <Button as={NavLink} to="/create-post" color="danger">
-                                Create
-                            </Button>
+                            {currentPath === "/create-post" ? (
+                                ""
+                            ) : (
+                                <Button as={NavLink} to="/create-post" color="danger">
+                                    Create
+                                </Button>
+                            )}
 
                             <div className="hidden md:block">
                                 <Dropdown placement="bottom-end" className={`${theme === "dark" ? "dark text-white" : ""}`}>
@@ -116,15 +120,7 @@ export default function Layout() {
                         </>
                     )}
                     <NavbarItem>
-                        <Switch
-                            className="hidden md:flex"
-                            defaultSelected={theme === "light"}
-                            onChange={() => toggleTheme(theme, setTheme)}
-                            size="sm"
-                            color="danger"
-                            startContent={<SunIcon />}
-                            endContent={<MoonIcon />}
-                        ></Switch>
+                        <Switch className="hidden md:flex" defaultSelected={theme === "light"} onChange={() => toggleTheme(theme, setTheme)} size="sm" color="danger" startContent={<SunIcon />} endContent={<MoonIcon />}></Switch>
                     </NavbarItem>
                 </NavbarContent>
                 <NavbarMenu>
