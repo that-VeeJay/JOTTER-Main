@@ -5,10 +5,9 @@ import { Autocomplete, AutocompleteItem, Button, Input } from "@nextui-org/react
 import { sleep } from "../../Helpers/Helpers";
 import categories from "../../Helpers/Categories";
 import { UploadIcon } from "../../Icons/UploadIcon";
-import { AppContext } from "../../Context/AppContext";
 import SectionTitle from "../../Components/SectionTitle";
-import { LatestPostsContext } from "../../Context/LatestPostsContext";
-
+import { AuthContext } from "../../Context/AuthProvider";
+import { LatestPostsContext } from "../../Context/LatestPostsProvider";
 import "react-quill/dist/quill.bubble.css";
 
 export default function CreatePost() {
@@ -19,7 +18,7 @@ export default function CreatePost() {
     const [isLoading, setIsLoading] = useState(false);
     const [previewImage, setPreviewImage] = useState(null);
 
-    const { token } = useContext(AppContext);
+    const { token } = useContext(AuthContext);
     const { refreshLatestPosts } = useContext(LatestPostsContext);
 
     const handleImageChange = (e) => {

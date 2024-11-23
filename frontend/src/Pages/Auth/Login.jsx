@@ -1,10 +1,10 @@
 import { Card, Input, Button } from "@nextui-org/react";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AppContext } from "../../Context/AppContext";
+import { AuthContext } from "../../Context/AuthProvider";
 
 export default function Login() {
-    const { setToken } = useContext(AppContext);
+    const { setToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const initialFields = { email: "", password: "" };

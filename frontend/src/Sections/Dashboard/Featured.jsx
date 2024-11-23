@@ -4,7 +4,7 @@ import MyImage from "../../Components/MyImage";
 import { formatDate } from "../../Helpers/Helpers";
 import post1 from "../../../public/posts/post1.jpg";
 import CategoryChip from "../../Components/CategoryChip";
-import { FeaturedPostsContext } from "../../Context/FeaturedPostsContext";
+import { FeaturedPostsContext } from "../../Context/FeaturedPostsProvider";
 
 export default function Featured() {
     const { featuredPosts: posts, loading } = useContext(FeaturedPostsContext);

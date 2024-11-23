@@ -1,7 +1,6 @@
 import { Card, Input, Button } from "@nextui-org/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { sleep } from "../../Helpers/Helpers";
 
 export default function Register() {
     const initialFields = { name: "", email: "", password: "", password_confirmation: "" };

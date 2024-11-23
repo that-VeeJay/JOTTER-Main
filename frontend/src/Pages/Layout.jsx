@@ -4,7 +4,8 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, Navba
 import { JotterLogo } from "../Icons/JotterLogo";
 import { MoonIcon } from "../Icons/MoonIcon";
 import { SunIcon } from "../Icons/SunIcon";
-import { AppContext } from "../Context/AppContext";
+import { ThemeContext } from "../Context/ThemeProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 export default function Layout() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +17,7 @@ export default function Layout() {
     const currentPath = location.pathname;
 
     // ************ Theme Logic ************
-    const { theme, setTheme } = useContext(AppContext);
+    const { theme, setTheme } = useContext(ThemeContext);
 
     const toggleTheme = (currentTheme, setTheme) => {
         const newTheme = currentTheme === "dark" ? "light" : "dark";
@@ -25,7 +26,7 @@ export default function Layout() {
 
     // ************ Logout Logic ************
     const navigate = useNavigate();
-    const { user, token, setUser, setToken } = useContext(AppContext);
+    const { user, token, setUser, setToken } = useContext(AuthContext);
 
     const handleLogout = async (e) => {
         e.preventDefault();

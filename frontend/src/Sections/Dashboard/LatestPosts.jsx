@@ -4,7 +4,7 @@ import SectionTitle from "../../Components/SectionTitle";
 import CategoryChip from "../../Components/CategoryChip";
 import { formatDate } from "../../Helpers/Helpers";
 import { useContext } from "react";
-import { LatestPostsContext } from "../../Context/LatestPostsContext";
+import { LatestPostsContext } from "../../Context/LatestPostsProvider";
 
 export default function LatestPosts() {
     const { latestPosts: posts, loading } = useContext(LatestPostsContext);

@@ -1,8 +1,8 @@
 import { lazy, Suspense, useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AppContext } from "./Context/AppContext";
 import Layout from "./Pages/Layout";
 import { Spinner } from "@nextui-org/react";
+import { ThemeContext } from "./Context/ThemeProvider";
 
 const Creators = lazy(() => import("./Pages/Creators"));
 const Dashboard = lazy(() => import("./Pages/Dashboard"));
@@ -26,7 +26,7 @@ const withSuspense = (Component) => {
 };
 
 export default function App() {
-    const { theme } = useContext(AppContext);
+    const { theme } = useContext(ThemeContext);
 
     return (
         <main className={`${theme} text-foreground bg-background`}>
