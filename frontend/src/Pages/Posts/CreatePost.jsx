@@ -2,13 +2,14 @@ import { useContext, useState } from "react";
 import ReactQuill from "react-quill";
 import { Link, useNavigate } from "react-router-dom";
 import { Autocomplete, AutocompleteItem, Button, Input } from "@nextui-org/react";
-import { sleep } from "../Helpers/Helpers";
-import { UploadIcon } from "../Icons/UploadIcon";
-import { AppContext } from "../Context/AppContext";
-import SectionTitle from "../Components/SectionTitle";
-import { LatestPostsContext } from "../Context/LatestPostsContext";
+import { sleep } from "../../Helpers/Helpers";
+import categories from "../../Helpers/Categories";
+import { UploadIcon } from "../../Icons/UploadIcon";
+import { AppContext } from "../../Context/AppContext";
+import SectionTitle from "../../Components/SectionTitle";
+import { LatestPostsContext } from "../../Context/LatestPostsContext";
+
 import "react-quill/dist/quill.bubble.css";
-import categories from "../Helpers/Categories";
 
 export default function CreatePost() {
     const navigate = useNavigate();

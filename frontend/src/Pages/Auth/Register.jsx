@@ -1,6 +1,7 @@
 import { Card, Input, Button } from "@nextui-org/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { sleep } from "../../Helpers/Helpers";
 
 export default function Register() {
     const initialFields = { name: "", email: "", password: "", password_confirmation: "" };
@@ -10,28 +11,40 @@ export default function Register() {
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
 
-    async function handleFormSubmit(e) {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        const res = await fetch("/api/register", {
-            method: "post",
-            body: JSON.stringify(formData),
-        });
+        try {
+            const res = await fetch("/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
-        const data = await res.json();
-        setLoading(false);
+            if (!res.ok) {
+                throw new Error(`Login failed with status ${res.status}`);
+            }
 
-        if (data.errors) {
-            setErrors(data.errors);
-        } else {
-            setMessage(data.message);
-            setFormData(initialFields);
-            setErrors({});
+            const data = await res.json();
 
-            localStorage.setItem("token", data.token);
+            if (data.errors) {
+                setErrors(data.errors);
+            } else {
+                setMessage(data.message);
+                setFormData(initialFields);
+                setErrors({});
+
+                localStorage.setItem("token", data.token);
+            }
+        } catch (error) {
+            console.error("Error during registration:", error);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <div className="flex items-center justify-center min-h-screen">

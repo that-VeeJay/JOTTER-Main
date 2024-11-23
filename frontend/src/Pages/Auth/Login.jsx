@@ -13,26 +13,38 @@ export default function Login() {
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
 
-    async function handleFormSubmit(e) {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        const res = await fetch("/api/login", {
-            method: "post",
-            body: JSON.stringify(formData),
-        });
+        try {
+            const res = await fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
-        const data = await res.json();
-        setLoading(false);
+            if (!res.ok) {
+                throw new Error(`Login failed with status ${res.status}`);
+            }
 
-        if (data.errors) {
-            setErrors(data.errors);
-        } else {
-            localStorage.setItem("token", data.token);
-            setToken(data.token);
-            navigate("/");
+            const data = await res.json();
+
+            if (data.errors) {
+                setErrors(data.errors);
+            } else {
+                localStorage.setItem("token", data.token);
+                setToken(data.token);
+                navigate("/");
+            }
+        } catch (error) {
+            console.error("Error during login: ", error);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <div className="flex items-center justify-center min-h-screen">

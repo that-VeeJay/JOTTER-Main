@@ -18,35 +18,36 @@ export default function Layout() {
     // ************ Theme Logic ************
     const { theme, setTheme } = useContext(AppContext);
 
-    function toggleTheme(currentTheme, setTheme) {
+    const toggleTheme = (currentTheme, setTheme) => {
         const newTheme = currentTheme === "dark" ? "light" : "dark";
         setTheme(newTheme);
-    }
+    };
 
     // ************ Logout Logic ************
     const navigate = useNavigate();
     const { user, token, setUser, setToken } = useContext(AppContext);
 
-    async function handleLogout(e) {
+    const handleLogout = async (e) => {
         e.preventDefault();
 
-        const res = await fetch("/api/logout", {
-            method: "post",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        try {
+            const res = await fetch("/api/logout", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
-        const data = await res.json();
-        console.log(data);
-
-        if (res.ok) {
-            setUser(null);
-            setToken(null);
-            localStorage.removeItem("token");
-            navigate("/login");
+            if (res.ok) {
+                setUser(null);
+                setToken(null);
+                localStorage.removeItem("token");
+                navigate("/login");
+            }
+        } catch (error) {
+            console.log("Error logging out".error);
         }
-    }
+    };
 
     return (
         <>

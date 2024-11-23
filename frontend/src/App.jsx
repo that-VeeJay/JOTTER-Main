@@ -9,7 +9,7 @@ const Dashboard = lazy(() => import("./Pages/Dashboard"));
 const Community = lazy(() => import("./Pages/Community"));
 const Login = lazy(() => import("./Pages/Auth/Login"));
 const Register = lazy(() => import("./Pages/Auth/Register"));
-const CreatePost = lazy(() => import("./Pages/CreatePost"));
+const CreatePost = lazy(() => import("./Pages/Posts/CreatePost"));
 
 const Loading = () => (
     <div className="container mx-auto text-center min-h-screen mt-12">
