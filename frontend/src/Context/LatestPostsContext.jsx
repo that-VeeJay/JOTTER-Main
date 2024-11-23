@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useEffect } from "react";
 
 export const LatestPostsContext = createContext();
 
@@ -15,11 +15,15 @@ export default function LatestPostsProvider({ children }) {
         setLoading(false);
     }
 
+    function refreshLatestPosts() {
+        getLatestPosts();
+    }
+
     useEffect(() => {
         if (!latestPosts) {
             getLatestPosts();
         }
     }, [latestPosts]);
 
-    return <LatestPostsContext.Provider value={{ latestPosts, loading }}>{children}</LatestPostsContext.Provider>;
+    return <LatestPostsContext.Provider value={{ latestPosts, loading, refreshLatestPosts }}>{children}</LatestPostsContext.Provider>;
 }
