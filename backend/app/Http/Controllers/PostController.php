@@ -63,4 +63,11 @@ class PostController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function show(Post $post)
+    {
+        // return ['post' => $post, 'user' => $post->user];
+
+        return array_merge($post->toArray(), ['user' => $post->user]);
+    }
 }

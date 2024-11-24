@@ -18,6 +18,9 @@ Route::controller(AuthController::class)->group(function () {
 
 
 Route::get("/posts", [PostController::class, 'index']);
+
+Route::get("/posts/{post}", [PostController::class, 'show']);
+
 Route::post("/posts", [PostController::class, 'store'])->middleware('auth:sanctum');
 
 

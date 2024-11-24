@@ -1,14 +1,15 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Avatar, Skeleton } from "@nextui-org/react";
 import MyImage from "../../Components/MyImage";
+import { formatDate } from "../../Helpers/Helpers";
 import SectionTitle from "../../Components/SectionTitle";
 import CategoryChip from "../../Components/CategoryChip";
-import { formatDate } from "../../Helpers/Helpers";
-import { useContext } from "react";
 import { LatestPostsContext } from "../../Context/LatestPostsProvider";
 
 export default function LatestPosts() {
     const { latestPosts: posts, loading } = useContext(LatestPostsContext);
-
+    console.log("rendering latest post....");
     return (
         <section className="space-y-3">
             <SectionTitle showArrow={true}>Latest Posts</SectionTitle>
@@ -30,15 +31,19 @@ export default function LatestPosts() {
             ) : posts ? (
                 posts.map((post) => (
                     <div key={post.id} className="grid md:grid-cols-3 ">
-                        <MyImage src={post.image} className="aspect-video md:aspect-square object-cover" />
+                        <Link to={`/posts/${post.id}`}>
+                            <MyImage src={post.image} className="aspect-video md:aspect-square object-cover" />
+                        </Link>
                         <div className="md:col-span-2 p-5 lg:p-8 space-y-2 lg:space-y-3">
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3 pb-2">
                                 <Avatar src="https://i.pravatar.cc/150?u=a042581f4e2902602d" name="Mary" size="sm" />
                                 <p className="font-medium">{post.user.name}</p>
                                 <span>•</span>
                                 <small className="text-zinc-400 font-semibold">{formatDate(post.created_at)}</small>
                             </div>
-                            <h2 className="text-xl lg:text-2xl line-clamp-2 font-semibold">{post.title}</h2>
+                            <Link to={`/posts/${post.id}`}>
+                                <h2 className="text-xl lg:text-2xl line-clamp-2 font-semibold hover:text-zinc-700 dark:hover:text-zinc-300">{post.title}</h2>
+                            </Link>
                             <p className="text-sm lg:text-medium line-clamp-3 text-zinc-400">{post.body}</p>
                             <CategoryChip>{post.category}</CategoryChip>
                         </div>
