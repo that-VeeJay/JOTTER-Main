@@ -6,7 +6,7 @@ export default function CategoryChip({ children, size = "sm" }) {
     };
 
     const categoryColors = {
-        Food: "bg-green-500",
+        Food: "bg-green-800",
         Technology: "bg-blue-500",
         Gaming: "bg-purple-500",
         Travel: "bg-yellow-500",

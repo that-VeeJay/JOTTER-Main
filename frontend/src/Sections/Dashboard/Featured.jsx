@@ -78,7 +78,7 @@ export default function Featured() {
                                 </Card>
                             </div>
                             <div className="md:col-start-2 md:col-end-8 order-1 md:order-none">
-                                <MyImage src={post1} loading="lazy" className="aspect-[4/2.5] object-cover" />
+                                <MyImage src={post1} loading="lazy" alt="Featured Post" className="aspect-[4/2.5] object-cover" />
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@ export default function Featured() {
                             posts.slice(1).map((post) => (
                                 <div key={post.id} className="grid grid-cols-7">
                                     <div className="col-start-1 col-end-3">
-                                        <MyImage src={post.image} loading="lazy" className="aspect-square object-cover" />
+                                        <MyImage src={post.image} loading="lazy" alt="Sub-featured post" className="aspect-square object-cover" />
                                     </div>
                                     <div className="col-start-3 col-end-8 p-2 flex flex-col gap-1 justify-center space-y-1">
                                         <div className="flex items-center gap-2">

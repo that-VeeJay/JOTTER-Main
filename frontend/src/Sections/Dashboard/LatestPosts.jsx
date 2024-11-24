@@ -9,7 +9,7 @@ import { LatestPostsContext } from "../../Context/LatestPostsProvider";
 
 export default function LatestPosts() {
     const { latestPosts: posts, loading } = useContext(LatestPostsContext);
-    console.log("rendering latest post....");
+
     return (
         <section className="space-y-3">
             <SectionTitle showArrow={true}>Latest Posts</SectionTitle>
@@ -32,7 +32,7 @@ export default function LatestPosts() {
                 posts.map((post) => (
                     <div key={post.id} className="grid md:grid-cols-3 ">
                         <Link to={`/posts/${post.id}`}>
-                            <MyImage src={post.image} className="aspect-video md:aspect-square object-cover" />
+                            <MyImage src={post.image} alt="Latest Post" className="aspect-video md:aspect-square object-cover" />
                         </Link>
                         <div className="md:col-span-2 p-5 lg:p-8 space-y-2 lg:space-y-3">
                             <div className="flex items-center gap-3 pb-2">

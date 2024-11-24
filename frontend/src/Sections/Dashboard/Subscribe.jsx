@@ -11,7 +11,7 @@ export default function Subscribe() {
             </div>
             <div className="flex items-center gap-3 px-5 lg:px-16">
                 <Input type="email" label="Email" className="" />
-                <Button color="danger" className="h-[55px]">
+                <Button color="danger" className="h-[55px] text-white">
                     Subscribe
                 </Button>
             </div>
