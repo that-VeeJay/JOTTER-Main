@@ -1,7 +1,7 @@
 import { Switch } from "@nextui-org/react";
-import { MoonIcon } from "../Icons/MoonIcon";
-import { SunIcon } from "../Icons/SunIcon";
-import { ThemeContext } from "../Context/ThemeProvider";
+import { MoonIcon } from "../icons/MoonIcon";
+import { SunIcon } from "../icons/SunIcon";
+import { ThemeContext } from "../contexts/ThemeProvider";
 import { useContext, useCallback } from "react";
 
 export default function ToggleTheme() {

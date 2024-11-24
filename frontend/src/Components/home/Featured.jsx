@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { Avatar, Card, Skeleton } from "@nextui-org/react";
-import MyImage from "../../Components/MyImage";
-import { formatDate } from "../../Helpers/Helpers";
+import MyImage from "../MyImage";
+import { formatDate } from "../../lib/Helpers";
 import post1 from "../../../public/posts/post1.jpg";
-import CategoryChip from "../../Components/CategoryChip";
-import { FeaturedPostsContext } from "../../Context/FeaturedPostsProvider";
+import CategoryChip from "../CategoryChip";
+
+import { FeaturedPostsContext } from "../../contexts/FeaturedPostsProvider";
 
 export default function Featured() {
     const { featuredPosts: posts, loading } = useContext(FeaturedPostsContext);

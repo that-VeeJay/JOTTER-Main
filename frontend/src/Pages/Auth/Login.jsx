@@ -1,7 +1,7 @@
 import { Card, Input, Button } from "@nextui-org/react";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthProvider";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 export default function Login() {
     const { setToken } = useContext(AuthContext);

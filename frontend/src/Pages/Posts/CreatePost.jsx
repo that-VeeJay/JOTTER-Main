@@ -2,12 +2,14 @@ import { useContext, useState } from "react";
 import ReactQuill from "react-quill";
 import { Link, useNavigate } from "react-router-dom";
 import { Autocomplete, AutocompleteItem, Button, Input } from "@nextui-org/react";
-import { sleep } from "../../Helpers/Helpers";
-import categories from "../../Helpers/Categories";
-import { UploadIcon } from "../../Icons/UploadIcon";
-import SectionTitle from "../../Components/SectionTitle";
-import { AuthContext } from "../../Context/AuthProvider";
-import { LatestPostsContext } from "../../Context/LatestPostsProvider";
+import { categories } from "../../lib/Categories";
+import { UploadIcon } from "../../icons/UploadIcon";
+import { MAX_FILE_SIZE } from "../../lib/Constants";
+import SectionTitle from "../../components/SectionTitle";
+import { ACCEPTED_FILE_TYPE } from "../../lib/Constants";
+import { AuthContext } from "../../contexts/AuthProvider";
+import { LatestPostsContext } from "../../contexts/LatestPostsProvider";
+
 import "react-quill/dist/quill.bubble.css";
 
 export default function CreatePost() {
@@ -24,8 +26,7 @@ export default function CreatePost() {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
 
-        const acceptedTypes = ["image/jpeg", "image/png", "image/jpg"];
-        if (file && acceptedTypes.includes(file.type) && file.size <= 5000000) {
+        if (file && ACCEPTED_FILE_TYPE.includes(file.type) && file.size <= MAX_FILE_SIZE) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 setPreviewImage(e.target.result);
@@ -64,7 +65,6 @@ export default function CreatePost() {
             postData.append("image", formData.image);
         }
 
-        await sleep(1000);
         const res = await fetch("/api/posts", {
             method: "POST",
             headers: {

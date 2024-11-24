@@ -1,4 +1,4 @@
-import SectionTitle from "../../Components/SectionTitle";
+import SectionTitle from "../SectionTitle";
 
 export default function Categories() {
     return (

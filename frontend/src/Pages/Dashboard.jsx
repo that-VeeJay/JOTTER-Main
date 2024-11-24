@@ -1,20 +1,15 @@
-import MostPopular from "../Sections/MostPopular";
-import Bulletin from "../Sections/Dashboard/Bulletin";
-import Featured from "../Sections/Dashboard/Featured";
-import Subscribe from "../Sections/Dashboard/Subscribe";
-import Categories from "../Sections/Dashboard/Categories";
-import LatestPosts from "../Sections/Dashboard/LatestPosts";
-
-import FeaturedPostsProvider from "../Context/FeaturedPostsProvider";
+import MostPopular from "../components/home/MostPopular";
+import Bulletin from "../components/home/Bulletin";
+import Featured from "../components/home/Featured";
+import Subscribe from "../components/home/Subscribe";
+import Categories from "../components/home/Categories";
+import LatestPosts from "../components/home/LatestPosts";
 
 export default function Dashboard() {
     return (
         <div className="container mx-auto min-h-screen pt-5  space-y-6 md:space-y-12">
             <Bulletin />
-
-            <FeaturedPostsProvider>
-                <Featured />
-            </FeaturedPostsProvider>
+            <Featured />
 
             <div className="grid xl:grid-cols-3 gap-5">
                 <div className="xl:col-span-2">
@@ -25,9 +20,8 @@ export default function Dashboard() {
                     <Categories />
                 </div>
             </div>
-            <Subscribe />
 
-            <br />
+            <Subscribe />
         </div>
     );
 }

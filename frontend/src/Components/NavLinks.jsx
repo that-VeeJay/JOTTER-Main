@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { NavbarItem } from "@nextui-org/react";
 import { useMemo } from "react";
+import { useLocation } from "react-router-dom";
 
-export default function NavLinks({ currentPath }) {
+export default function NavLinks() {
+    const location = useLocation();
+    const currentPath = location.pathname;
+
     const navItems = useMemo(
         () => [
             { path: "/", label: "Dashboard" },

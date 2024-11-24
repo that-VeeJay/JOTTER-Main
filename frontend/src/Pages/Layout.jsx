@@ -1,20 +1,17 @@
-import { Outlet, useLocation, Link, NavLink } from "react-router-dom";
-import { useContext, useState, useMemo } from "react";
+import { Outlet, Link, NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, Button } from "@nextui-org/react";
-import { JotterLogo } from "../Icons/JotterLogo";
-import { AuthContext } from "../Context/AuthProvider";
+import { JotterLogo } from "../icons/JotterLogo";
+import { AuthContext } from "../contexts/AuthProvider";
 
-import ToggleTheme from "../Components/ToggleTheme";
-import ProfileDropdown from "../Components/ProfileDropdown";
-import MobileMenuItems from "../Components/MobileMenuItems";
-import NavLinks from "../Components/NavLinks";
+import ToggleTheme from "../components/ToggleTheme";
+import ProfileDropdown from "../components/ProfileDropdown";
+import MobileMenuItems from "../components/MobileMenuItems";
+import NavLinks from "../components/NavLinks";
 
 export default function Layout() {
     const { user } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const location = useLocation();
-    const currentPath = location.pathname;
 
     return (
         <>
@@ -29,20 +26,15 @@ export default function Layout() {
 
                 <NavbarContent className="" justify="center">
                     <ul className="hidden sm:flex gap-4">
-                        <NavLinks currentPath={currentPath} />
+                        <NavLinks />
                     </ul>
                 </NavbarContent>
                 <NavbarContent justify="end">
                     {user ? (
                         <>
-                            {currentPath === "/create-post" ? (
-                                ""
-                            ) : (
-                                <Button as={NavLink} to="/create-post" color="danger" className="text-white">
-                                    Create
-                                </Button>
-                            )}
-
+                            <Button as={NavLink} to="/create-post" color="danger" className="text-white">
+                                Create
+                            </Button>
                             <ProfileDropdown />
                         </>
                     ) : (
