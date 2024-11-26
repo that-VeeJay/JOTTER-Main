@@ -1,8 +1,8 @@
 import { Card, Input, Button } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { register } from "../../services/authService";
+import { register } from "@services/authService";
 
 export default function Register() {
     const initialFields = { name: "", email: "", password: "", password_confirmation: "" };

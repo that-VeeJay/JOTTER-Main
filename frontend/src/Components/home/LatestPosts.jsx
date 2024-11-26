@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Avatar, Skeleton } from "@nextui-org/react";
 import MyImage from "../MyImage";
-import { formatDate } from "../../lib/Helpers";
-import SectionTitle from "../SectionTitle";
-import CategoryChip from "../CategoryChip";
-import { LatestPostsContext } from "../../contexts/LatestPostsProvider";
+import { formatDate } from "@lib/Helpers";
+import SectionTitle from "@components/SectionTitle";
+import CategoryChip from "@components/CategoryChip";
+import { LatestPostsContext } from "@contexts/LatestPostsProvider";
 
 export default function LatestPosts() {
     const { latestPosts: posts, isLoading } = useContext(LatestPostsContext);

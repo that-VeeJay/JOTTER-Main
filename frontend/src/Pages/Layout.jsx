@@ -1,13 +1,12 @@
-import { Outlet, Link, NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, Button } from "@nextui-org/react";
-import { JotterLogo } from "../icons/JotterLogo";
-import { AuthContext } from "../contexts/AuthProvider";
-
-import ToggleTheme from "../components/ToggleTheme";
-import ProfileDropdown from "../components/ProfileDropdown";
-import MobileMenuItems from "../components/MobileMenuItems";
-import NavLinks from "../components/NavLinks";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import NavLinks from "@components/NavLinks";
+import { JotterLogo } from "@icons/JotterLogo";
+import ToggleTheme from "@components/ToggleTheme";
+import { AuthContext } from "@contexts/AuthProvider";
+import ProfileDropdown from "@components/ProfileDropdown";
+import MobileMenuItems from "@components/MobileMenuItems";
+import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuToggle } from "@nextui-org/react";
 
 export default function Layout() {
     const { user } = useContext(AuthContext);

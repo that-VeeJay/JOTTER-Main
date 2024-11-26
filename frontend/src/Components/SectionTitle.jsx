@@ -1,4 +1,4 @@
-import { RightArrowIcon } from "../icons/RightArrowIcon";
+import { RightArrowIcon } from "@icons/RightArrowIcon";
 
 export default function SectionTitle({ children, showArrow = false, subtitle = null }) {
     return (

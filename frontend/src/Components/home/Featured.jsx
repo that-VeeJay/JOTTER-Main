@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Avatar, Card, Skeleton } from "@nextui-org/react";
 import MyImage from "../MyImage";
-import { formatDate } from "../../lib/Helpers";
+import { formatDate } from "@lib/Helpers";
 import post1 from "../../../public/posts/post1.jpg";
-import CategoryChip from "../CategoryChip";
+import CategoryChip from "@components/CategoryChip";
 
 import { FeaturedPostsContext } from "../../contexts/FeaturedPostsProvider";
 

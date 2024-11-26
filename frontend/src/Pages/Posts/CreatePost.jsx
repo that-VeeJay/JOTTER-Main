@@ -3,12 +3,12 @@ import ReactQuill from "react-quill";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Autocomplete, AutocompleteItem, Button, Input } from "@nextui-org/react";
-import { categories } from "../../lib/Categories";
-import { UploadIcon } from "../../icons/UploadIcon";
-import { MAX_FILE_SIZE, ACCEPTED_FILE_TYPE } from "../../lib/Constants";
-import { createPost } from "../../services/postService";
-import SectionTitle from "../../components/SectionTitle";
-import { AuthContext } from "../../contexts/AuthProvider";
+import { categories } from "@lib/Categories";
+import { UploadIcon } from "@icons/UploadIcon";
+import { MAX_FILE_SIZE, ACCEPTED_FILE_TYPE } from "@lib/Constants";
+import { createPost } from "@services/postService";
+import SectionTitle from "@components/SectionTitle";
+import { AuthContext } from "@contexts/AuthProvider";
 import "react-quill/dist/quill.bubble.css";
 
 export default function CreatePost() {

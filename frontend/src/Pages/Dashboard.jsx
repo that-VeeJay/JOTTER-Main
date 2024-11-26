@@ -1,9 +1,9 @@
-import MostPopular from "../components/home/MostPopular";
-import Bulletin from "../components/home/Bulletin";
-import Featured from "../components/home/Featured";
-import Subscribe from "../components/home/Subscribe";
-import Categories from "../components/home/Categories";
-import LatestPosts from "../components/home/LatestPosts";
+import MostPopular from "@components/home/MostPopular";
+import Bulletin from "@components/home/Bulletin";
+import Featured from "@components/home/Featured";
+import Subscribe from "@components/home/Subscribe";
+import Categories from "@components/home/Categories";
+import LatestPosts from "@components/home/LatestPosts";
 
 export default function Dashboard() {
     return (

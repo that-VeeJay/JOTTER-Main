@@ -1,11 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import { Avatar, Divider, Spinner } from "@nextui-org/react";
-import MyImage from "../../components/MyImage";
-import { formatDate } from "../../lib/Helpers";
-import CategoryChip from "../../components/CategoryChip";
-import SectionTitle from "../../components/SectionTitle";
+import MyImage from "@components/MyImage";
+import { formatDate } from "@lib/Helpers";
+import CategoryChip from "@components/CategoryChip";
+import SectionTitle from "@components/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
-import { fetchSinglePost } from "../../services/postService";
+import { fetchSinglePost } from "@services/postService";
 
 export default function Show() {
     const { id } = useParams();

@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
-import { AuthContext } from "../contexts/AuthProvider";
-import { ThemeContext } from "../contexts/ThemeProvider";
+import { AuthContext } from "@contexts/AuthProvider";
+import { ThemeContext } from "@contexts/ThemeProvider";
 import { useMutation } from "@tanstack/react-query";
-import { logout } from "../services/authService";
+import { logout } from "@services/authService";
 
 export default function ProfileDropdown() {
     const { theme } = useContext(ThemeContext);

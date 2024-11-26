@@ -1,5 +1,5 @@
-import SectionTitle from "../SectionTitle";
-import CategoryChip from "../CategoryChip";
+import SectionTitle from "@components/SectionTitle";
+import CategoryChip from "@components/CategoryChip";
 
 export default function MostPopular() {
     return (

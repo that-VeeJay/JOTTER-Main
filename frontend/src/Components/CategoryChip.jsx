@@ -1,4 +1,4 @@
-import { categoryColors } from "../lib/Categories";
+import { categoryColors } from "@lib/Categories";
 
 export default function CategoryChip({ children, size = "sm" }) {
     const sizeClasses = {
