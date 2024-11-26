@@ -1,6 +1,8 @@
 import { Card, Input, Button } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { register } from "../../services/authService";
 
 export default function Register() {
     const initialFields = { name: "", email: "", password: "", password_confirmation: "" };
@@ -8,41 +10,24 @@ export default function Register() {
     const [formData, setFormData] = useState(initialFields);
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState("");
-    const [loading, setLoading] = useState(false);
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-
-        try {
-            const res = await fetch("/api/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (!res.ok) {
-                throw new Error(`Login failed with status ${res.status}`);
-            }
-
-            const data = await res.json();
-
+    const { mutate, isPending } = useMutation({
+        mutationFn: () => register(formData),
+        onSuccess: (data) => {
             if (data.errors) {
                 setErrors(data.errors);
             } else {
                 setMessage(data.message);
                 setFormData(initialFields);
                 setErrors({});
-
                 localStorage.setItem("token", data.token);
             }
-        } catch (error) {
-            console.error("Error during registration:", error);
-        } finally {
-            setLoading(false);
-        }
+        },
+    });
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        mutate(formData);
     };
 
     return (
@@ -62,8 +47,8 @@ export default function Register() {
 
                     <Input type="password" value={formData.password_confirmation} onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })} label="Confirm Password" />
 
-                    <Button type="submit" isLoading={loading} className="w-full p-6 bg-zinc-800 text-white">
-                        {loading ? "Please wait..." : "Create an account"}
+                    <Button type="submit" isLoading={isPending} className="w-full p-6 bg-zinc-800 text-white">
+                        {isPending ? "Please wait..." : "Create an account"}
                     </Button>
                     <p>
                         Already have an account?{" "}

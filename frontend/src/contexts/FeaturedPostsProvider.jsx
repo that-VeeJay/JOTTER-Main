@@ -1,23 +1,16 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export const FeaturedPostsContext = createContext();
 
 export default function FeaturedPostsProvider({ children }) {
-    const [featuredPosts, setFeaturedPosts] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const { data: featuredPosts, isLoading } = useQuery({
+        queryKey: ["featured_posts"],
+        queryFn: async () => {
+            const res = await fetch(`/api/posts?type=${"featured"}&limit=${4}`);
+            return res.json();
+        },
+    });
 
-    const getFeaturedPosts = async () => {
-        setLoading(true);
-
-        const res = await fetch(`/api/posts?type=${"featured"}&limit=${4}`);
-        const data = await res.json();
-        setFeaturedPosts(data);
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        getFeaturedPosts();
-    }, []);
-
-    return <FeaturedPostsContext.Provider value={{ featuredPosts, loading }}>{children}</FeaturedPostsContext.Provider>;
+    return <FeaturedPostsContext.Provider value={{ featuredPosts, isLoading }}>{children}</FeaturedPostsContext.Provider>;
 }

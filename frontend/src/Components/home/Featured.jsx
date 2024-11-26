@@ -8,11 +8,11 @@ import CategoryChip from "../CategoryChip";
 import { FeaturedPostsContext } from "../../contexts/FeaturedPostsProvider";
 
 export default function Featured() {
-    const { featuredPosts: posts, loading } = useContext(FeaturedPostsContext);
+    const { featuredPosts: posts, isLoading } = useContext(FeaturedPostsContext);
 
     return (
         <section>
-            {loading ? (
+            {isLoading ? (
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 grid-rows-1">
                     {/* Column 1 */}
                     <div className="col-span-1 xl:col-span-2">

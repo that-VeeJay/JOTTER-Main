@@ -2,6 +2,8 @@ import { Card, Input, Button } from "@nextui-org/react";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "../../services/authService";
 
 export default function Login() {
     const { setToken } = useContext(AuthContext);
@@ -11,39 +13,24 @@ export default function Login() {
 
     const [formData, setFormData] = useState(initialFields);
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-
-        try {
-            const res = await fetch("/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (!res.ok) {
-                throw new Error(`Login failed with status ${res.status}`);
-            }
-
-            const data = await res.json();
-
+    const { mutate, isPending } = useMutation({
+        mutationFn: () => login(formData),
+        onSuccess: (data) => {
             if (data.errors) {
+                console.log(data.errors);
                 setErrors(data.errors);
             } else {
                 localStorage.setItem("token", data.token);
                 setToken(data.token);
                 navigate("/");
             }
-        } catch (error) {
-            console.error("Error during login: ", error);
-        } finally {
-            setLoading(false);
-        }
+        },
+    });
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        mutate(formData);
     };
 
     return (
@@ -57,8 +44,8 @@ export default function Login() {
                     <Input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} label="Password" />
                     {errors.password && <span className="text-red-500 text-sm font-medium">{errors.password[0]}</span>}
 
-                    <Button type="submit" isLoading={loading} className="w-full p-6 bg-zinc-800 text-white">
-                        {loading ? "Please wait..." : "Login"}
+                    <Button type="submit" isLoading={isPending} className="w-full p-6 bg-zinc-800 text-white">
+                        {isPending ? "Please wait..." : "Login"}
                     </Button>
                     <p>
                         Do not have an account?{" "}

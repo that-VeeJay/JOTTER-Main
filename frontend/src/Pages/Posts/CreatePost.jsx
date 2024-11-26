@@ -1,29 +1,30 @@
 import { useContext, useState } from "react";
 import ReactQuill from "react-quill";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Autocomplete, AutocompleteItem, Button, Input } from "@nextui-org/react";
 import { categories } from "../../lib/Categories";
 import { UploadIcon } from "../../icons/UploadIcon";
-import { MAX_FILE_SIZE } from "../../lib/Constants";
+import { MAX_FILE_SIZE, ACCEPTED_FILE_TYPE } from "../../lib/Constants";
+import { createPost } from "../../services/postService";
 import SectionTitle from "../../components/SectionTitle";
-import { ACCEPTED_FILE_TYPE } from "../../lib/Constants";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { LatestPostsContext } from "../../contexts/LatestPostsProvider";
-
 import "react-quill/dist/quill.bubble.css";
 
 export default function CreatePost() {
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
+
+    const { token } = useContext(AuthContext);
+
     const initialValue = { title: "", category: "", image: null, body: "" };
     const [formData, setFormData] = useState(initialValue);
     const [formError, setFormError] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
     const [previewImage, setPreviewImage] = useState(null);
 
-    const { token } = useContext(AuthContext);
-    const { refreshLatestPosts } = useContext(LatestPostsContext);
-
     const handleImageChange = (e) => {
+        e.preventDefault();
+
         const file = e.target.files[0];
 
         if (file && ACCEPTED_FILE_TYPE.includes(file.type) && file.size <= MAX_FILE_SIZE) {
@@ -40,48 +41,40 @@ export default function CreatePost() {
 
     const handleDrop = (e) => {
         e.preventDefault();
+        e.stopPropagation();
+
         const file = e.dataTransfer.files[0];
-        if (file) {
+
+        if (file && ACCEPTED_FILE_TYPE.includes(file.type) && file.size <= MAX_FILE_SIZE) {
             const reader = new FileReader();
             reader.onload = (event) => {
                 setPreviewImage(event.target.result);
             };
             reader.readAsDataURL(file);
+            setFormData({ ...formData, image: file });
+        } else {
+            alert("Invalid file type or size.");
         }
     };
 
-    const preventDefault = (e) => e.preventDefault();
+    const { mutate, isPending } = useMutation({
+        mutationFn: () => createPost(formData, token),
+        onSuccess: (response) => {
+            if (response?.errors) {
+                setFormError(response.errors);
+            } else {
+                queryClient.invalidateQueries({ queryKey: ["latest_posts"] });
+                navigate("/");
+            }
+        },
+        onError: () => {
+            console.error("Post submission error:", error.message);
+        },
+    });
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setIsLoading(true);
-
-        const postData = new FormData();
-        postData.append("title", formData.title);
-        postData.append("category", formData.category);
-        postData.append("body", formData.body);
-
-        if (formData.image) {
-            postData.append("image", formData.image);
-        }
-
-        const res = await fetch("/api/posts", {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            body: postData,
-        });
-
-        const data = await res.json();
-        setIsLoading(false);
-
-        if (data.errors) {
-            setFormError(data.errors);
-        } else {
-            refreshLatestPosts();
-            navigate("/");
-        }
+        mutate(formData);
     };
 
     return (
@@ -111,7 +104,7 @@ export default function CreatePost() {
                         <div className="flex gap-5">
                             {/* Image Input */}
                             <div className="flex items-center justify-center w-1/2">
-                                <label htmlFor="dropzone-file" onDragOver={preventDefault} onDragEnter={preventDefault} onDrop={handleDrop} className="flex flex-col items-center justify-center w-full h-52 border-2 border-zinc-300 border-dashed rounded-lg cursor-pointer bg-zinc-50  dark:bg-zinc-800 hover:bg-zinc-100 dark:border-zinc-600 dark:hover:border-zinc-500 dark:hover:bg-zinc-900">
+                                <label htmlFor="dropzone-file" onDragOver={(e) => e.preventDefault()} onDragEnter={(e) => e.preventDefault()} onDrop={handleDrop} className="flex flex-col items-center justify-center w-full h-52 border-2 border-zinc-300 border-dashed rounded-lg cursor-pointer bg-zinc-50  dark:bg-zinc-800 hover:bg-zinc-100 dark:border-zinc-600 dark:hover:border-zinc-500 dark:hover:bg-zinc-900">
                                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                         <UploadIcon />
                                         <p className="mb-2 text-sm text-zinc-500 dark:text-zinc-400">
@@ -148,8 +141,8 @@ export default function CreatePost() {
                         <Link to="/" className="text-sm text-zinc-400">
                             cancel
                         </Link>
-                        <Button type="submit" isLoading={isLoading} color="danger">
-                            {isLoading ? "Please wait..." : "Publish"}
+                        <Button type="submit" isLoading={isPending} color="danger">
+                            {isPending ? "Please wait..." : "Publish"}
                         </Button>
                     </div>
                 </form>
