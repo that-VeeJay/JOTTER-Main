@@ -61,7 +61,9 @@ export default function Show() {
 
                     <div className="grid grid-cols-3 mt-10">
                         <div className="col-span-3 lg:col-span-2 lg:mr-8 xl:mr-12">
-                            <p className="text-justify text-lg lg:text-xl">{post.body}</p>
+                            <p className="text-justify text-lg lg:text-xl custom-rq" dangerouslySetInnerHTML={{ __html: post.body }}>
+                                {/* {post.body} */}
+                            </p>
                         </div>
                         <aside className="hidden lg:block">
                             <SectionTitle showArrow={false} subtitle="Discover">

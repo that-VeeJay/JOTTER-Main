@@ -11,6 +11,12 @@ import SectionTitle from "@components/SectionTitle";
 import { AuthContext } from "@contexts/AuthProvider";
 import "react-quill/dist/quill.bubble.css";
 
+const modules = {
+    toolbar: [[{ header: [1, 2, false] }], ["blockquote", "bold", "italic", "underline", "strike"], [{ list: "ordered" }, { list: "bullet" }], ["link", "code-block"], [{ color: [] }, { background: [] }]],
+};
+
+const formats = ["header", "blockquote", "bold", "italic", "underline", "strike", "list", "bullet", "link", "code-block", "color", "background"];
+
 export default function CreatePost() {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
@@ -134,7 +140,7 @@ export default function CreatePost() {
                     </div>
                     <div>
                         <p className="text-zinc-500">Share your story...</p>
-                        <ReactQuill theme="bubble" value={formData.body} onChange={(value) => setFormData({ ...formData, body: value })} className="bg-zinc-100  h-96 rounded-2xl hover:bg-zinc-200 dark:bg-zinc-800  p-5" />
+                        <ReactQuill theme="bubble" value={formData.body} modules={modules} formats={formats} onChange={(value) => setFormData({ ...formData, body: value })} className="bg-zinc-100  h-96 rounded-2xl hover:bg-zinc-200 dark:bg-zinc-800  p-5" />
                         {formError.body && <p className="text-red-500 text-sm">{formError.body}</p>}
                     </div>
                     <div className="text-right space-x-5">
